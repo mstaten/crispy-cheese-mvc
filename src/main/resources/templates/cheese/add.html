@@ -7,26 +7,32 @@
 
     <nav th:replace="fragments :: navigation"></nav>
 
-    <form method="post" style="max-width:600px;" th:object="${cheese}" class="form-inline">
-        <input th:field="*{name}" placeholder="cheese name" />
+    <span th:unless="${categories} and ${categories.size()}">
+        <p>No categories! You must add one before you can add a cheese</p>
+        <p><a th:href="@{/category/add}">Add Category</a></p>
+    </span>
 
-        <input th:field="*{description}" placeholder="cheese desc" />
+    <span th:if="${categories} and ${categories.size()}" >
+        <form method="post" style="max-width:600px;" th:object="${cheese}" class="form-inline">
+            <input th:field="*{name}" placeholder="cheese name" />
 
-        <select th:field="*{type}">
-            <option th:each="cheeseType : ${cheeseTypes}"
-                    th:text="${cheeseType.name}"
-                    th:value="${cheeseType}">
-            </option>
-        </select>
+            <input th:field="*{description}" placeholder="cheese desc" />
 
-        <input type="submit" value="Add Cheese" class="btn btn-warning"/>
+            <select name="categoryId">
+                <option th:each="category : ${categories}"
+                        th:text="${category.name}"
+                        th:value="${category.id}">
+                </option>
+            </select>
 
-        <div>
-            <p th:errors="*{name}" class="error"></p>
-            <p th:errors="*{description}" class="error"></p>
-            <p th:errors="*{type}" class="error"></p>
-        </div>
-    </form>
+            <input type="submit" value="Add Cheese" class="btn btn-warning"/>
+
+            <div>
+                <p th:errors="*{name}" class="error"></p>
+                <p th:errors="*{description}" class="error"></p>
+            </div>
+        </form>
+    </span>
 
 </body>
 </html>
