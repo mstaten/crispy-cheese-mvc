@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
-<h1 th:text="${title}">Default Title</h1>
 
-<nav th:replace="fragments :: navigation"></nav>
+<body class="container body-content">
+    <h1 th:text="${title}">Default Title</h1>
 
-<form method="post" style="max-width:600px;" th:object="${cheese}">
-    <div class="form-group">
-        <label th:for="name">Name</label>
-        <input class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error"></span>
-    </div>
-    <div class="form-group">
-        <label th:for="description">Description</label>
-        <input class="form-control" th:field="*{description}" />
-        <span th:errors="*{description}" class="error"></span>
-    </div>
+    <nav th:replace="fragments :: navigation"></nav>
 
-    <div class="form-group">
-        <label th:for="type">Type</label>
+    <form method="post" style="max-width:600px;" th:object="${cheese}" class="form-inline">
+        <input th:field="*{name}" placeholder="cheese name" />
+
+        <input th:field="*{description}" placeholder="cheese desc" />
+
         <select th:field="*{type}">
             <option th:each="cheeseType : ${cheeseTypes}"
                     th:text="${cheeseType.name}"
-                    th:value="${cheeseType}"></option>
+                    th:value="${cheeseType}">
+            </option>
         </select>
-    </div>
 
-    <input type="submit" value="Add Cheese" />
-</form>
+        <input type="submit" value="Add Cheese" class="btn btn-warning"/>
+
+        <div>
+            <p th:errors="*{name}" class="error"></p>
+            <p th:errors="*{description}" class="error"></p>
+            <p th:errors="*{type}" class="error"></p>
+        </div>
+    </form>
 
 </body>
 </html>

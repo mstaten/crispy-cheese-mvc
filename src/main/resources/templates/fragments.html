@@ -5,15 +5,25 @@
     <title th:text="${title}">My Cheeses</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 
-<nav th:fragment="navigation">
-    <a href="/cheese">List</a> |
-    <a href="/cheese/add">Add</a> |
-    <a href="/cheese/remove">Remove</a>
+<nav th:fragment="navigation" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a th:href="@{/cheese}" class="navbar-brand">MyCheeses</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/cheese/add}">Add Cheese</a></li>
+                <li><a th:href="@{/cheese/remove}">Remove Cheese</a></li>
+                <li><a th:href="@{/category}">Categories</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 </body>
